@@ -31,8 +31,8 @@ def python_is_text(text="is_cool"):
 
 @app.route('/number/<int:n>', strict_slashes=False)
 def show_number(n):
-        """ Prints a message when the show_number route is requested """
-            return ("{} is a number".format(n))
+    """ Prints a message when the show_number route is requested """
+    return ("{} is a number".format(n))
 
 
 if __name__ == "__main__":
