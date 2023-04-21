@@ -22,6 +22,7 @@ def c_is_text(text):
     return ("C " + text.replace('_', ' '))
 
 
+@app.route('/python', strict_slashes=False)
 @app.route('/python/<text>', strict_slashes=False)
 def python_is_text(text="is_cool"):
     """ Prints a message when the python_is_text route is requested """
