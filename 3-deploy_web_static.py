@@ -1,27 +1,20 @@
 #!/usr/bin/python3
 """
-fabric script that generates a .tgz from the contents of web_static
-
+Fabric script that generates archive
 """
+
 from fabric.api import *
 from datetime import datetime
 import os
 
-env.hosts = ["54.237.87.4", "54.160.105.182"]
+env.hosts = ["54.237.87.4", "54.166.135.167"]
 env.user = "ubuntu"
 
 
 def do_pack():
     """
-        returns the archive path if archive has been correctly
-        created.
-        all files in the folder web_static are added to the final archive
-        all archives must be stored in the folder versions
-        the name of the archive created has the format
-        web_static_<year><month><day><hour><minute><second>.tgz
-        the function do_pack must return the archive path
-        if the archive has been correctly generated.
-        otherwise, it should return None
+        return the archive path if correctly gernerated.
+        archives all files in the web_static directory
     """
 
     local("mkdir -p versions")
@@ -37,11 +30,7 @@ def do_pack():
 
 def do_deploy(archive_path):
     """
-        Distribute the archive.
-        all files in the folder web_static are added to the final archive
-        all files in the folder web_static are added to the final archive
-        all files in the folder web_static are added to the final archive
-        all files in the folder web_static are added to the final
+        Distribute an archive to our web servers
     """
     if os.path.exists(archive_path):
         archived_file = archive_path[9:]
@@ -61,4 +50,14 @@ def do_deploy(archive_path):
         print("New version deployed!")
         return True
 
+    return False
+
+
+def deploy():
+    """
+    Deploy function do_pack and do_deploy.
+    """
+    path = do_pack()
+    if path:
+        do_deploy(path)
     return False
